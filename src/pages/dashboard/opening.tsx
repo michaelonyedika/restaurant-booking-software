@@ -1,10 +1,9 @@
-// import { Button } from "@chakra-ui/react";
 import { Button } from "~/components/ui/button";
 import TimeSelector from "@components/TimeSelector";
 import { Switch } from "@headlessui/react";
 import type { Day } from "@prisma/client";
 import { formatISO } from "date-fns";
-import { type FC, useState } from "react";
+import { FC, useState } from "react";
 import { Calendar } from "react-calendar";
 import toast, { Toaster } from "react-hot-toast";
 import { now } from "src/constants/config";
@@ -12,11 +11,11 @@ import prisma from "~/server/api/trpc";
 import { api } from "~/utils/api";
 import { capitalize, classNames, weekdayIndexToName } from "~/utils/helper";
 
-interface openingProps {
+interface OpeningProps {
   days: Day[];
 }
 
-const opening: FC<openingProps> = ({ days }) => {
+const Opening: FC<OpeningProps> = ({ days }) => {
   const [enabled, setEnabled] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [openingHrs, setOpeningHrs] = useState([
@@ -136,7 +135,6 @@ const opening: FC<openingProps> = ({ days }) => {
                     }
                   />
                 </div>
-
                 <div className="mx-4">
                   <TimeSelector
                     type="closeTime"
@@ -182,7 +180,6 @@ const opening: FC<openingProps> = ({ days }) => {
               return closeDays?.includes(formatISO(date)) ? "closed-day" : null;
             }}
           />
-
           <Button
             onClick={() => {
               if (dayIsClosed) openDay({ date: selectedDate });
@@ -190,7 +187,6 @@ const opening: FC<openingProps> = ({ days }) => {
             }}
             disabled={!selectedDate}
             loading={isLoading}
-            // colorPalette="green"
             variant="solid"
           >
             {dayIsClosed ? "Open shop this day" : "Close shop this day"}
@@ -209,4 +205,4 @@ export async function getServerSideProps() {
   return { props: { days } };
 }
 
-export default opening;
+export default Opening; // Capitalized component name

@@ -1,11 +1,10 @@
-import { ChangeEvent, FC, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { HiLockClosed } from "react-icons/hi";
 import { api } from "../utils/api";
 import { useRouter } from "next/router";
+import Image from "next/image"; // Use Next.js Image component for optimization
 
-interface LoginProps {}
-
-const Login: FC<LoginProps> = ({}) => {
+const Login = () => {
   const router = useRouter();
   const [input, setInput] = useState({
     email: "",
@@ -23,14 +22,25 @@ const Login: FC<LoginProps> = ({}) => {
     setInput((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await login(input); // Ensure the login is awaited properly
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
-          <img
+          <Image
             className="mx-auto h-12 w-auto"
             src="https://tailwindui.com/plus/img/logos/158x48/reform-logo-gray-900.svg"
             alt="Workflow"
+            width={158} // Set image width and height for optimization
+            height={48}
           />
           <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
             Sign in to your account
@@ -45,7 +55,7 @@ const Login: FC<LoginProps> = ({}) => {
             </a>
           </p>
         </div>
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="-space-y-px rounded-md shadow-sm">
             <p className="pb-1 text-sm text-red-600">
               {isError && "Invalid login credentials"}
@@ -113,10 +123,6 @@ const Login: FC<LoginProps> = ({}) => {
           <div>
             <button
               type="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                login(input);
-              }}
               className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">

@@ -1,4 +1,4 @@
-import Menu from "@components/Menu";
+import MenuC from "@components/Menu";
 import Spinner from "@components/Spinner";
 import { parse, parseISO } from "date-fns";
 import { useRouter } from "next/router";
@@ -8,9 +8,9 @@ import { api } from "src/utils/api";
 import { BsCart } from "react-icons/bs";
 import Cart from "~/components/Cart";
 
-interface menuProps {}
+// interface menuProps {}
 
-const menu: FC<menuProps> = ({}) => {
+const Menu: FC = ({}) => {
   const router = useRouter();
 
   const [selectedTime, setSelectedTime] = useState<string | null>(null); // as ISO string
@@ -93,7 +93,7 @@ const menu: FC<menuProps> = ({}) => {
             </div>
           </div>
 
-          <Menu addToCart={addToCart} selectedTime={selectedTime} />
+          <MenuC addToCart={addToCart} selectedTime={selectedTime} />
         </>
       ) : (
         <div className=" flex h-screen items-center justify-center">
@@ -104,4 +104,4 @@ const menu: FC<menuProps> = ({}) => {
   );
 };
 
-export default menu;
+export default Menu;

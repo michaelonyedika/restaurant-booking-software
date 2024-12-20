@@ -13,7 +13,7 @@ interface MenuProps {
   addToCart: (id: string, quantity: number) => void;
 }
 
-const Menu: FC<MenuProps> = ({ selectedTime, addToCart }) => {
+const MenuC: FC<MenuProps> = ({ selectedTime, addToCart }) => {
   const router = useRouter();
   const { data: menuItems } = api.menu.getMenuItems.useQuery();
   const [filter, setFilter] = useState<undefined | string>("");
@@ -87,4 +87,4 @@ const Menu: FC<MenuProps> = ({ selectedTime, addToCart }) => {
   );
 };
 
-export default Menu;
+export default MenuC;

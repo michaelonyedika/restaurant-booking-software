@@ -30,10 +30,18 @@ const CalendarComponent: FC<CalendarProps> = ({ days, closedDays }) => {
   });
 
   useEffect(() => {
-    if (date.dateTime) {
-      localStorage.setItem("selectedTime", date.dateTime.toISOString());
-      router.push("/menu");
-    }
+    const navigateToMenu = async () => {
+      if (date.dateTime) {
+        localStorage.setItem("selectedTime", date.dateTime.toISOString());
+        try {
+          await router.push("/menu");
+        } catch (error) {
+          console.error("Failed to navigate to /menu:", error);
+        }
+      }
+    };
+
+    navigateToMenu();
   }, [date.dateTime, router]);
 
   const times = date.justDate && getOpeningTimes(date.justDate, days);
