@@ -78,8 +78,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 });
 
 const isAdmin = t.middleware(async ({ ctx, next }) => {
-  const { req } = ctx;
-  const token = req.cookies["user-token"];
+  const token = ctx.req.cookies?.["user-token"];
 
   if (!token) {
     throw new TRPCError({
@@ -88,7 +87,7 @@ const isAdmin = t.middleware(async ({ ctx, next }) => {
     });
   }
 
-  const verifiedToken = await verifyAuth(token);
+  const verifiedToken = await verifyAuth(token).catch(() => null);
 
   if (!verifiedToken) {
     throw new TRPCError({
@@ -97,7 +96,7 @@ const isAdmin = t.middleware(async ({ ctx, next }) => {
     });
   }
 
-  // user is authenticated as admin
+  // User is authenticated as admin
   return next();
 });
 
