@@ -20,13 +20,11 @@ export const adminRouter = createTRPCRouter({
       const { res } = ctx;
       const { email, password } = input;
 
-      const admin_email = "admin@gmail.com";
-      const admin_password = "admin25";
+      // const admin_email = "admin@gmail.com";
+      // const admin_password = "admin25";
       if (
-        // email === process.env.ADMIN_EMAIL &&
-        // password === process.env.ADMIN_PASSWORD
-        email === admin_email &&
-        password === admin_password
+        email === process.env.ADMIN_EMAIL &&
+        password === process.env.ADMIN_PASSWORD
       ) {
         const token = await new SignJWT({})
           .setProtectedHeader({ alg: "HS256" })

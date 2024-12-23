@@ -87,27 +87,7 @@ const isAdmin = t.middleware(async ({ ctx, next }) => {
       message: "Missing user token",
     });
   }
-  const isAdmin = t.middleware(async ({ ctx, next }) => {
-    const { req } = ctx;
-    const token = req.cookies["user-token"];
 
-    if (!token) {
-      throw new TRPCError({
-        code: "UNAUTHORIZED",
-        message: "Missing user token",
-      });
-    }
-    const verifiedToken = await verifyAuth(token);
-
-    if (!verifiedToken) {
-      throw new TRPCError({
-        code: "UNAUTHORIZED",
-        message: "Invalid user token",
-      });
-    }
-
-    return next();
-  });
   const verifiedToken = await verifyAuth(token);
 
   if (!verifiedToken) {

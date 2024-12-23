@@ -15,7 +15,7 @@ export async function middleware(req: NextRequest) {
     }));
 
   if (req.nextUrl.pathname.startsWith("/login") && !verifiedToken) {
-    return;
+    return NextResponse.next();
   }
 
   const url = req.url;
@@ -27,7 +27,7 @@ export async function middleware(req: NextRequest) {
   if (!verifiedToken) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
-  return;
+  return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
