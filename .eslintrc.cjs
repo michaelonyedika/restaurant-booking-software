@@ -43,6 +43,7 @@ const config = {
     "@typescript-eslint/await-thenable": "warn",
     "@typescript-eslint/no-base-to-string": "warn",
     "@typescript-eslint/no-unnecessary-type-assertion": "warn",
+    "@typescript-eslint/no-unsafe-member-access": "warn",
   },
 };
 module.exports = config;
