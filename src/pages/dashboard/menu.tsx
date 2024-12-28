@@ -145,6 +145,8 @@ const Menu: React.FC = () => {
                   style={{ objectFit: "contain" }}
                   fill
                   src={preview}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
                 />
               </div>
             ) : (
@@ -178,7 +180,13 @@ const Menu: React.FC = () => {
             <div key={menuItem.id}>
               <p>{menuItem.name}</p>
               <div className="relative h-40 w-40">
-                <Image priority fill alt="" src={menuItem.url} />
+                <Image
+                  priority
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt=""
+                  src={menuItem.url}
+                />
               </div>
               <button
                 onClick={() =>

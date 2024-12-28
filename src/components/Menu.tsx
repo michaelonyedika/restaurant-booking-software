@@ -44,15 +44,17 @@ const MenuC: FC<MenuProps> = ({ selectedTime, addToCart }) => {
           />
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div className="  mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4  xl:gap-x-8 ">
           {filteredMenuItems?.map((menuItem) => (
             <div key={menuItem.id} className="group relative">
               <div className="min-h-80 aspect-w-1 aspect-h-1 lg:aspect-none w-full overflow-hidden rounded-md bg-gray-200 hover:opacity-75 lg:h-80">
-                <div className="relative h-full w-full object-cover object-center lg:h-full lg:w-full">
+                <div className="relative h-80 w-full object-cover object-center lg:h-full lg:w-full">
                   <Image
                     src={menuItem.url}
                     alt={menuItem.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
                     style={{ objectFit: "cover" }}
                   />
                 </div>
@@ -72,7 +74,7 @@ const MenuC: FC<MenuProps> = ({ selectedTime, addToCart }) => {
               </div>
 
               <Button
-                className="mt-4"
+                className="mt-4 bg-indigo-800 text-white p-2"
                 onClick={() => {
                   addToCart(menuItem.id, 1);
                 }}

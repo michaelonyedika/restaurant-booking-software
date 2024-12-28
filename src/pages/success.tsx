@@ -1,6 +1,6 @@
 import { Spinner } from "@chakra-ui/react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState, useEffect, type FC } from "react";
 import { capitalize } from "src/utils/helper";
 import { api } from "src/utils/api";

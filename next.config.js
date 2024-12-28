@@ -25,6 +25,11 @@ const config = {
         hostname: "restaurant-booking-software-mck.s3.amazonaws.com",
         pathname: "/**", // Allow all paths
       },
+      {
+        protocol: "https",
+        hostname: "tailwindui.com", // Add tailwindui.com to the list
+        pathname: "/plus/img/**", // Allow specific path pattern for Tailwind UI
+      },
     ],
     // Define custom device sizes for responsive images
     deviceSizes: [320, 420, 768, 1024, 1200],

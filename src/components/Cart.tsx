@@ -5,7 +5,6 @@ import { Fragment, type Dispatch, type FC, type SetStateAction } from "react";
 import { HiX } from "react-icons/hi";
 import { capitalize } from "src/utils/helper";
 import { api } from "src/utils/api";
-import Image from "next/image";
 
 interface CartProps {
   open: boolean;
@@ -21,12 +20,8 @@ const Cart: FC<CartProps> = ({ open, setOpen, products, removeFromCart }) => {
   const { data: itemsInCart } = api.menu.getCartItems.useQuery(products);
   const { mutate: checkout, isPending } =
     api.checkout.checkoutSession.useMutation({
-      onSuccess: async ({ url }) => {
-        try {
-          await router.push(url); // Await the promise returned by router.push
-        } catch (error) {
-          console.error("Failed to navigate to checkout:", error);
-        }
+      onSuccess: ({ url }) => {
+        router.push(url);
       },
       onMutate: ({ products }) => {
         localStorage.setItem("products", JSON.stringify(products));
@@ -100,7 +95,7 @@ const Cart: FC<CartProps> = ({ open, setOpen, products, removeFromCart }) => {
                               return (
                                 <li key={item.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <Image
+                                    <img
                                       src={item.url}
                                       alt={item.name}
                                       className="h-full w-full object-cover object-center"
